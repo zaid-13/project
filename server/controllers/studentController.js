@@ -10,9 +10,9 @@ module.exports.createStudent = async (req, res) => {
             rollNo,
             studentId
         });
-        res.json({ result: "success", data: createdUser });
+        res.json({ message: "success", data: createdUser });
     } catch (error) {
-        res.json({ result: "fail", error })
+        res.json({ message: "fail", error })
         console.log("user not created: ", error);
     }
 };
@@ -59,13 +59,13 @@ module.exports.deleteStudent = async (req, res) => {
 };
 
 module.exports.loginStudent = async (req, res) => {
-    const { userName, password } = req.body;
+    const { email: emailId, password } = req.body;
     try {
-        const student = await Student.findOne({ userName });
-        if (student) {
+        const student = await Student.findOne({ emailId });
+        if (student && password === student.studentId) {
             res.json({ message: "success", data: student });
         } else {
-            res.json({ message: "error" });
+            res.json({ message: "fail", data: "No such student found" });
         }
     } catch (error) {
         res.json({ message: "error", error })

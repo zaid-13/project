@@ -11,6 +11,12 @@
     margin: 0 auto;
 }
 
+.show-update-modal {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+}
+
 a {
     text-decoration: none;
 }
